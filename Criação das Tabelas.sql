@@ -40,3 +40,15 @@ precoPago		decimal(10, 2)	not null,
 primary key (numeroVenda, codigoProduto),
 foreign key (numeroVenda)	references vendas(numero),
 foreign key (codigoProduto) references produtos(codigo));
+
+
+create table codReferencia (
+entidade		varchar(45)		not null,
+cod				int(10)			not null,
+primary key (entidade));
+
+insert into codReferencia value ("clinetes", 0);
+
+insert into codReferencia value ("produtos", 0);
+
+insert into codReferencia value ("vendas", 0);
