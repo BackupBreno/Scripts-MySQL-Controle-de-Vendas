@@ -1,4 +1,8 @@
+use VendasBD;
+
 drop trigger att_cod_cliente
+drop trigger att_cod_produto
+drop trigger att_cod_venda
 
 delimiter $$
 create trigger att_cod_cliente after insert on clientes
@@ -10,8 +14,6 @@ begin
 end $$
 delimiter ;
 
-drop trigger att_cod_produto
-
 delimiter $$
 create trigger att_cod_produto after insert on produtos
 for each row
@@ -21,8 +23,6 @@ begin
 
 end $$
 delimiter ;
-
-drop trigger att_cod_venda
 
 delimiter $$
 create trigger att_cod_venda after insert on vendas

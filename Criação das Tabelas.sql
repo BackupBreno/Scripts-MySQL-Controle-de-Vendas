@@ -9,6 +9,7 @@ create table clientes (
 codigo			int(10)			not null,
 nome			varchar(45)		not null,
 endereco		varchar(45)		not null,
+telefone		varchar(45)		not null,
 primary key (codigo));
 
 
@@ -33,7 +34,7 @@ primary key (codigo));
 
 
 create table itensVendidos (
-numeroVenda		int(10)			not null,
+numeroVenda		int(10)		not null,
 codigoProduto	int(10)			not null,
 qtdVenda		int(10)			not null,
 precoPago		decimal(10, 2)	not null,
@@ -46,9 +47,3 @@ create table codReferencia (
 entidade		varchar(45)		not null,
 cod				int(10)			not null,
 primary key (entidade));
-
-insert into codReferencia value ("clinetes", 0);
-
-insert into codReferencia value ("produtos", 0);
-
-insert into codReferencia value ("vendas", 0);

@@ -1,6 +1,7 @@
 use VendasBD;
 
 drop trigger verifica_estoque
+drop trigger att_date
 
 delimiter $$
 create trigger verifica_estoque before insert on itensVendidos
@@ -23,8 +24,6 @@ begin
 
 end $$
 delimiter ;
-
-drop trigger att_date
 
 delimiter $$
 create trigger att_date before insert on vendas
