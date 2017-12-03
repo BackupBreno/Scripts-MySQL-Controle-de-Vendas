@@ -5,7 +5,7 @@ drop trigger att_cod_produto
 drop trigger att_cod_venda
 
 delimiter $$
-create procedure incrementa_cod (in entidadeDesejada int(10))
+create procedure incrementa_cod (in entidadeDesejada varchar(45))
 begin
 
 	update codReferencia set cod = cod + 1 where entidade = entidadeDesejada;

@@ -4,14 +4,12 @@ drop trigger verifica_estoque
 drop trigger att_date
 
 delimiter $$
-create procedure valida_estoque (in cod int(10), in qtdVendida int(10), out valido boolean)
+create procedure valida_estoque (in cod int(10), in qtdVendida int(10), out valido boolean, out newQtd int(10))
 begin
-
-	declare qtd int(10);
     
-    set qtd = (select quantidadeEst from produtos where codigo = cod);
+    set newQtd = (select quantidadeEst from produtos where codigo = cod);
     
-    if (qtd - qtdVendida) < 0 then
+    if (newQtd - qtdVendida) < 0 then
 		
         set valido = false;
 
@@ -29,11 +27,13 @@ create trigger verifica_estoque before insert on itensVendidos
 for each row
 begin
     
+    declare qtd int(10);
+    
     declare valido boolean;
     
-	call valida_estoque(new.codigoProduto, new.qtdVenda, valido);
+	call valida_estoque(new.codigoProduto, new.qtdVenda, valido, qtd);
 
-    if valido then
+    if not valido then
 		
         signal sqlstate '45000' set message_text = 'Estoque insuficiente.';
 
@@ -47,7 +47,7 @@ end $$
 delimiter ;
 
 delimiter $$
-create procedure valida_data (in dateVencimento date, in dataVenda date, out valido boolean)
+create procedure valida_data (in dataVencimento date, in dataVenda date, out valido boolean)
 begin
     
     if dataVencimento < dataVenda then
